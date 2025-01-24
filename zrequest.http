@@ -1,0 +1,121 @@
+GET http://localhost:4004/odata/Employees
+###
+
+DELETE http://localhost:4004/odata/Employees(8)
+
+###
+
+POST http://localhost:4004/odata/Employees
+Content-Type: application/json
+
+{
+      "FIRST_NAME": "Kurvesh",
+      "LAST_NAME": "Patel",
+      "GENDER": "Male",
+      "EMAIL": "kurvesh.patel@vsdtechno.com",
+      "EXPERIENCE":2,
+      "DESIGNATION":"SAP UI5 & Fiori Consultant",
+      "MODULE":"SAP UI5 & Fiori",
+      "MODULE_TYPE":"Technical",
+      "PHONE_NO": 1234567890,
+      "QR_CODE": ""
+      
+}
+
+###
+
+GET http://localhost:4004/odata/PunchingDetails
+
+###
+
+POST http://localhost:4004/odata/Punch
+Content-Type: application/json
+
+{
+    "Action":"IN",
+    "EmpId":3
+}
+
+###
+
+GET http://localhost:4004/odata/Leaves
+
+###
+
+POST http://localhost:4004/odata/PunchingDetails
+Content-Type: application/json
+
+{
+    "EMP_CODE_EMP_ID":1,
+    "PUNCH_DATE":"4/1/2025",
+    "PUNCH_IN":"10:05:44",
+    "PUNCH_OUT":""
+}
+
+###
+
+GET http://localhost:4004/odata/EmployeePunchingDetails
+
+###
+
+GET http://localhost:4004/odata/LeaveRequests
+
+###
+
+POST http://localhost:4004/odata/LeaveRequests
+Content-Type: application/json
+
+{
+    "APPLIED_BY_EMP_ID":"42d5959d-4f3d-4c69-b0bb-a91ceb1446fe",
+    "FROM_DATE":"Jan 27, 2025",
+    "TO_DATE":"Jan 28, 2025",
+    "PRIORITY":"High",
+    "TYPE":"Sick Leave",
+    "REASON":"Hospital visit for eye check up",
+    "STATUS":""
+}
+
+###
+DELETE http://localhost:4004/odata/LeaveRequests('9e8665ff-9f05-46d4-9808-3d3bd081f01f')
+
+###
+
+POST http://localhost:4004/odata/ApproveLeave
+Content-Type: application/json
+
+{
+    "LeaveRequestId":"b3199732-a902-4650-8910-b0322b3caa8f",
+    "LeaveType":"Sick Leave",
+    "EmpId":"42d5959d-4f3d-4c69-b0bb-a91ceb1446fe"
+}
+
+###
+
+POST http://localhost:4004/odata/RejectLeave
+Content-Type: application/json
+
+{
+    "LeaveRequestId":"7a6a8fc0-c16c-497c-8a36-dcb3c37ffcd9",
+    "LeaveType":"Casual Leave",
+    "EmpId":"42d5959d-4f3d-4c69-b0bb-a91ceb1446fe"
+}
+
+###
+
+
+GET http://localhost:4004/odata/LeaveBalances
+
+###
+
+POST http://localhost:4004/odata/LeaveBalances
+Content-Type: application/json
+
+{
+    "TOTAL_LEAVE_COUNT":20,
+    "AVAILABLE_LEAVE_COUNT":17,
+    "EMP_EMP_ID":"ef8f3d67-a0da-4cbb-be32-113f97453d4c"
+}
+
+###
+
+GET http://localhost:4004/odata/GetLoggedInUser(Email='tiwaribhavesh45@gmail.com')

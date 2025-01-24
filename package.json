@@ -1,0 +1,52 @@
+{
+  "name": "ztimetracker",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@cap-js-community/odata-v2-adapter": "^1.14.0",
+    "@cap-js/hana": "1.1.0",
+    "@sap/cds": "^7",
+    "@sap/xssec": "^4",
+    "express": "^4",
+    "nodemailer": "^6.9.16",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "@cap-js/cds-types": "^0.2.0",
+    "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^7",
+    "rimraf": "^5.0.5",
+    "mbt": "^1.2.29"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "h": "cds watch --profile hybrid",
+    "watch-zmngemployeepunching": "cds watch --open zmngemployeepunching/webapp/index.html?sap-ui-xx-viewCache=false",
+    "undeploy": "cf undeploy ztimetracker --delete-services --delete-service-keys --delete-service-brokers",
+    "build": "rimraf resources mta_archives && mbt build --mtar archive",
+    "d": "cf deploy mta_archives/ztimetracker_1.0.0.mtar",
+    "watch-zpunchinout": "cds watch --open zpunchinout/webapp/index.html?sap-ui-xx-viewCache=false",
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
+    "watch-zcreateleaverequest": "cds watch --open zcreateleaverequest/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-zleaverequest": "cds watch --open zleaverequest/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-project1": "cds watch --open project1/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-zleaveinbox": "cds watch --open zleaveinbox/webapp/index.html?sap-ui-xx-viewCache=false"
+  },
+  "cds": {
+    "requires": {
+      "auth": "dummy",
+      "db": "hana"
+    },
+    "sql": {
+      "native_hana_associations": false
+    }
+  },
+  "sapux": [
+    "app/zmngemployeepunching",
+    "app/zcreateleaverequest",
+    "app/project1"
+  ]
+}

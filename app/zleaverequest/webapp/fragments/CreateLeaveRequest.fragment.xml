@@ -1,0 +1,56 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:layout="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+>
+    <Dialog contentHeight="60%" contentWidth="35%"
+        title="Create Leave Request"
+        titleAlignment="Center"
+    >
+        <f:SimpleForm editable="true">
+            <Label text="Select Date" />
+            <DateRangeSelection value="{LeaveModel>/CreateLeaveRequestPayload/DATE}"/>
+            <Label text="Leave Type" />
+            <ComboBox items="{LeaveModel>/TypeItems}" value="{LeaveModel>/CreateLeaveRequestPayload/TYPE}">
+                <core:Item
+                    key="{LeaveModel>key}"
+                    text="{LeaveModel>value}"
+                />
+            </ComboBox>
+            <Label text="Priority" />
+            <ComboBox items="{LeaveModel>/PriorityItems}" value="{LeaveModel>/CreateLeaveRequestPayload/PRIORITY}">
+                <core:Item
+                    key="{LeaveModel>key}"
+                    text="{LeaveModel>value}"
+                />
+            </ComboBox>
+            <Label text="Employee" />
+            <ComboBox items="{LeaveModel>/User}" showSecondaryValues="true" value="{LeaveModel>FIRST_NAME} {LeaveModel>LAST_NAME}">
+                <core:ListItem 
+                    key="{LeaveModel>EMP_ID}"
+                    text="{LeaveModel>FIRST_NAME} {LeaveModel>LAST_NAME}" additionalText="{LeaveModel>DESIGNATION}"
+                />
+            </ComboBox>
+            <Label text="Reason" />
+            <TextArea rows="4" value="{LeaveModel>/CreateLeaveRequestPayload/REASON}"/>
+        </f:SimpleForm>
+
+        <buttons>
+            <Button
+                id="idCancelPop"
+                icon="sap-icon://decline"
+                text="Cancel"
+                type="Negative"
+                press="onLeaveRequestDialogCancelPress"
+            />
+            <Button
+                id="saveBtn"
+                text="Save"
+                icon="sap-icon://save"
+                press="onLeaveRequestSavePress"
+                type="Emphasized"
+            />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

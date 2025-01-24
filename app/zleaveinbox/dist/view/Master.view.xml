@@ -1,0 +1,45 @@
+<mvc:View
+    controllerName="zleaveinbox.controller.Master"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+>
+    <Page
+        titleAlignment="Center"
+        title="Leave Requests"
+        id="idPage"
+    >
+        <List
+            items="{
+                path: '/LeaveRequests',
+                filters: [{
+                    path: 'STATUS',
+                    operator: 'EQ',
+                    value1: 'Pending'
+                }]
+            }"
+            itemPress="onLeaveRequestsListItemPress"
+        >
+            <ObjectListItem
+                type="Navigation"
+                title="{TYPE}"
+            >
+                <ObjectAttribute text="{REASON}" />
+                <ObjectAttribute text="{FROM_DATE}-{TO_DATE}" />
+                <firstStatus>
+                    <ObjectStatus
+                        inverted="true"
+                        text="{PRIORITY}"
+                        state="{
+                            path: 'PRIORITY',
+                            formatter: '.formatter.formatPriority'
+                        }"
+                        icon="{
+                            path: 'PRIORITY',
+                            formatter: '.formatter.formatPriorityIcon'
+                        }"
+                    />
+                </firstStatus>
+            </ObjectListItem>
+        </List>
+    </Page>
+</mvc:View>

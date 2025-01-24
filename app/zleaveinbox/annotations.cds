@@ -1,0 +1,1 @@
+using timetracker.srv.service.TIME_TRACKER_SRV as service from '../../srv/service';

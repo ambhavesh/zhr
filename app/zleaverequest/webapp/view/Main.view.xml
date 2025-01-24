@@ -1,0 +1,49 @@
+<mvc:View
+    controllerName="zleaverequest.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <Page
+        id="page"
+        showHeader="false"
+    >
+        <List id="LeaveRequestList"
+            class="sapUiResponsiveContentPadding"
+            items="{LeaveModel>/LeaveRequestItem}"
+            mode="SingleSelectMaster"
+            selectionChange="onLeaveRequestSelectionChange"
+        >
+            <headerToolbar>
+                <OverflowToolbar>
+                    <Title text="Leave Requests ({LeaveModel>/RequestCount})" />
+                    <ToolbarSpacer />
+                    <Button
+                        icon="sap-icon://create-leave-request"
+                        text="Create Request"
+                        type="Emphasized"
+                        press="onCreateRequestPress"
+                    />
+                </OverflowToolbar>
+            </headerToolbar>
+
+            <ObjectListItem
+                title="{LeaveModel>TYPE}"
+                type="Active"
+                press="onListItemPress"
+            >
+                <firstStatus>
+                    <ObjectStatus
+                        inverted="true"
+                        icon="{path: 'LeaveModel>STATUS', formatter: '.formatter.formatStatusIcon'}"
+                        text="{LeaveModel>STATUS}"
+                        state="{path: 'LeaveModel>STATUS', formatter: '.formatter.formatStatus' }"
+                    />
+                </firstStatus>
+                <ObjectAttribute
+                    text="{LeaveModel>FROM_DATE} - {LeaveModel>TO_DATE}"
+                />
+            </ObjectListItem>
+        </List>
+    </Page>
+</mvc:View>

@@ -1,0 +1,2 @@
+sap.ui.define(["sap/ui/core/mvc/Controller"],e=>{"use strict";return e.extend("zleaveinbox.controller.App",{onInit(){},getModel:function(e){return e===""?this.getOwnerComponent().getModel():this.getOwnerComponent().getModel(e)},getFilter:function(e,t,n){return new sap.ui.model.Filter({path:e,operator:t,value1:n})},getRouter:function(){return this.getOwnerComponent().getRouter()}})});
+//# sourceMappingURL=App.controller.js.map

@@ -1,0 +1,157 @@
+<mvc:View
+    controllerName="zleaverequest.controller.LeaveRequestDetail"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:m="sap.m"
+    xmlns="sap.uxap"
+    xmlns:core="sap.ui.core"
+    xmlns:layout="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+>
+    <ObjectPageLayout
+        enableLazyLoading="true"
+        upperCaseAnchorBar="true"
+        showFooter="true"
+    >
+        <sections>
+            <ObjectPageSection
+                titleUppercase="false"
+                title="Request Overview"
+            >
+                <subSections>
+                    <ObjectPageSubSection
+                        title="Request Overview"
+                        titleUppercase="false"
+                    >
+                        <blocks>
+                            <m:VBox class="sapUiSmallMargin">
+                                <f:SimpleForm 
+                                    editable="false" 
+                                    layout="ColumnLayout" 
+                                    columnsM="2"
+                                    columnsL="3">
+                                    <f:content>
+                                        <m:Label text="Leave Type" />
+                                        <m:ComboBox
+                                            items="{LeaveModel>/TypeItems}"
+                                            value="{LeaveModel>/SelectedLeaveRequestObj/TYPE}"
+                                        >
+                                            <core:Item
+                                                key="{LeaveModel>key}"
+                                                text="{LeaveModel>value}"
+                                            />
+                                        </m:ComboBox>
+
+                                        <m:Label
+                                            text="Date Range"
+                                        />
+                                        <m:DateRangeSelection id="idUpdateDateRange"
+                                            width="100%"
+                                            value="{LeaveModel>/SelectedLeaveRequestObj/FROM_DATE} - {LeaveModel>/SelectedLeaveRequestObj/FROM_DATE}"
+                                        />
+
+                                        <m:Label text="Priority" />
+                                        <m:ComboBox
+                                            items="{LeaveModel>/PriorityItems}"
+                                            value="{LeaveModel>/SelectedLeaveRequestObj/PRIORITY}"
+                                        >
+                                            <core:Item
+                                                key="{LeaveModel>key}"
+                                                text="{LeaveModel>value}"
+                                            />
+                                        </m:ComboBox>
+
+                                        <m:Label
+                                            text="Status"
+                                        />
+                                        <m:ObjectStatus
+                                            inverted="true"
+                                            text="{LeaveModel>/SelectedLeaveRequestObj/STATUS}"
+                                            state="{path: 'LeaveModel>/SelectedLeaveRequestObj/STATUS', formatter: '.formatter.formatStatus' }"
+                                            icon="{path: 'LeaveModel>/SelectedLeaveRequestObj/STATUS', formatter: '.formatter.formatStatusIcon'}"
+                                        />
+
+                                        <m:Label text="Reason" />
+                                        <m:TextArea
+                                            width="100%"
+                                            rows="4"
+                                            value="{LeaveModel>/SelectedLeaveRequestObj/REASON}"
+                                        />
+                                    </f:content>
+                                </f:SimpleForm>
+                            </m:VBox>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+
+            <ObjectPageSection
+                titleUppercase="false"
+                title="Employee Details"
+            >
+                <subSections>
+                    <ObjectPageSubSection titleUppercase="false">
+                        <blocks>
+                            <m:VBox class="sapUiSmallMargin">
+                                <f:SimpleForm 
+                                    editable="false" 
+                                    layout="ColumnLayout" 
+                                    columnsM="2"
+                                    columnsL="3">
+                                    <f:content>
+                                            <m:Label text="Applied By:" />
+                                            <m:Text
+                                                text="{LeaveModel>/SelectedLeaveRequestObj/APPLIED_BY/FIRST_NAME} {LeaveModel>/SelectedLeaveRequestObj/APPLIED_BY/LAST_NAME}"
+                                            />
+                                            <m:Label
+                                                text="Email:"
+                                            />
+                                            <m:Text
+                                                text="{LeaveModel>/SelectedLeaveRequestObj/APPLIED_BY/EMAIL}"
+                                            />
+                                            <m:Label text="Module:" />
+                                            <m:Text
+                                                text="{LeaveModel>/SelectedLeaveRequestObj/APPLIED_BY/MODULE}"
+                                            />
+                                            <m:Label
+                                                text="Module Type:"
+                                            />
+                                            <m:Text
+                                                text="{LeaveModel>/SelectedLeaveRequestObj/APPLIED_BY/MODULE_TYPE}"
+                                            />
+                                            <m:Label text="Experience:" />
+                                            <m:Text
+                                                text="{LeaveModel>/SelectedLeaveRequestObj/APPLIED_BY/EXPERIENCE} years"
+                                            />
+                                            <m:Label
+                                                text="Phone no:"
+                                            />
+                                            <m:Text
+                                                text="{LeaveModel>/SelectedLeaveRequestObj/APPLIED_BY/PHONE_NO}"
+                                            />
+                                    </f:content>
+                                </f:SimpleForm>
+                            </m:VBox>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+        </sections>
+        <footer>
+            <m:OverflowToolbar>
+                <m:ToolbarSpacer />
+                <m:Button
+                    icon="sap-icon://decline"
+                    text="Cancel"
+                    type="Negative"
+                    press="onCancelRequestPress"
+                />
+                <m:Button
+                    icon="sap-icon://save"
+                    text="Save Request"
+                    type="Emphasized"
+                    press="onSaveRequestPress"
+                />
+            </m:OverflowToolbar>
+        </footer>
+    </ObjectPageLayout>
+</mvc:View>

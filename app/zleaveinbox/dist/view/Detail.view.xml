@@ -1,0 +1,151 @@
+<mvc:View
+    controllerName="zleaveinbox.controller.Detail"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+>
+    <Page title="Request Overview" titleAlignment="Center">
+        <ObjectHeader
+            binding="{JSONModel>/LeaveRequests}"
+            title="{JSONModel>TYPE}"
+            class="sapUiResponsivePadding--header"
+        >
+            <statuses>
+                <ObjectStatus
+                    text="{JSONModel>/LeaveRequests/STATUS}"
+                    state="{path: 'JSONModel>/LeaveRequests/STATUS', formatter: '.formatter.formatStatus' }"
+                    icon="{path: 'JSONModel>/LeaveRequests/STATUS', formatter: '.formatter.formatStatusIcon'}"
+                />
+                <ObjectStatus
+                    inverted="true"
+                    text="{JSONModel>/LeaveRequests/PRIORITY}"
+                    state="{path: 'JSONModel>/LeaveRequests/PRIORITY', formatter: '.formatter.formatPriority' }"
+                    icon="{path: 'JSONModel>/LeaveRequests/PRIORITY', formatter: '.formatter.formatPriorityIcon'}"
+                />
+            </statuses>
+
+            <ObjectAttribute
+                title="Leave Request ID"
+                text="{JSONModel>LEAVE_REQUEST_ID}"
+            />
+            <ObjectAttribute
+                title="Employee ID"
+                text="{JSONModel>APPLIED_BY/EMP_ID}"
+            />
+            <ObjectAttribute
+                title="Employee Name"
+                text="{JSONModel>APPLIED_BY/FIRST_NAME} {JSONModel>APPLIED_BY/LAST_NAME}"
+            />
+        </ObjectHeader>
+
+        <IconTabBar
+            expanded="{device>/isNoPhone}"
+            class="sapUiResponsiveContentPadding"
+        >
+            <items>
+                <IconTabFilter
+                    icon="sap-icon://hint"
+                    key="info"
+                >
+                    <VBox class="sapUiSmallMargin">
+                        <f:SimpleForm
+                            editable="false"
+                            layout="ColumnLayout"
+                            columnsM="2"
+                            columnsL="3"
+                        >
+                            <f:content>
+                                <Label text="Leave Type" />
+                                <Text text="{JSONModel>/LeaveRequests/TYPE}" />
+                                <Label text="Date Range" />
+                                <Text
+                                    text="{JSONModel>/LeaveRequests/FROM_DATE} - {JSONModel>/LeaveRequests/TO_DATE}"
+                                />
+                                <Label text="Priority" />
+                                <ObjectStatus
+                                    inverted="true"
+                                    text="{JSONModel>/LeaveRequests/PRIORITY}"
+                                    state="{path: 'JSONModel>/LeaveRequests/PRIORITY', formatter: '.formatter.formatPriority' }"
+                                    icon="{path: 'JSONModel>/LeaveRequests/PRIORITY', formatter: '.formatter.formatPriorityIcon'}"
+                                />
+                                <Label text="Status" />
+                                <ObjectStatus
+                                    text="{JSONModel>/LeaveRequests/STATUS}"
+                                    state="{path: 'JSONModel>/LeaveRequests/STATUS', formatter: '.formatter.formatStatus' }"
+                                    icon="{path: 'JSONModel>/LeaveRequests/STATUS', formatter: '.formatter.formatStatusIcon'}"
+                                />
+                                <Label text="Reason" />
+                                <Text
+                                    text="{JSONModel>/LeaveRequests/REASON}"
+                                />
+                            </f:content>
+                        </f:SimpleForm>
+                    </VBox>
+                </IconTabFilter>
+
+                <IconTabFilter
+                    icon="sap-icon://employee"
+                    key="employee"
+                >
+                    <VBox class="sapUiSmallMargin">
+                        <f:SimpleForm
+                            editable="false"
+                            layout="ColumnLayout"
+                            columnsM="2"
+                            columnsL="3"
+                        >
+                            <f:content>
+                                <Label text="Employee ID" />
+                                <Text
+                                    text="{JSONModel>/LeaveRequests/APPLIED_BY/EMP_ID}"
+                                />
+                                <Label text="Employee Name" />
+                                <Text
+                                    text="{JSONModel>/LeaveRequests/APPLIED_BY/FIRST_NAME} {JSONModel>/LeaveRequests/APPLIED_BY/LAST_NAME}"
+                                />
+                                <Label text="Gender" />
+                                <Text
+                                    text="{JSONModel>/LeaveRequests/APPLIED_BY/GENDER}"
+                                />
+                                <Label text="Experience" />
+                                <Text
+                                    text="{JSONModel>/LeaveRequests/APPLIED_BY/EXPERIENCE}"
+                                />
+                                <Label text="Designation" />
+                                <Text
+                                    text="{JSONModel>/LeaveRequests/APPLIED_BY/DESIGNATION}"
+                                />
+                                <Label text="Module" />
+                                <Text
+                                    text="{JSONModel>/LeaveRequests/APPLIED_BY/MODULE}"
+                                />
+                                <Label text="Module Type" />
+                                <Text
+                                    text="{JSONModel>/LeaveRequests/APPLIED_BY/MODULE_TYPE}"
+                                />
+                                <Label text="Phone No" />
+                                <Text
+                                    text="{JSONModel>/LeaveRequests/APPLIED_BY/PHONE_NO}"
+                                />
+                            </f:content>
+                        </f:SimpleForm>
+                    </VBox>
+                </IconTabFilter>
+                <IconTabFilter
+                    icon="sap-icon://attachment"
+                    key="attachments"
+                >
+                    <Text text="Attachments go here ..." />
+                </IconTabFilter>
+            </items>
+        </IconTabBar>
+
+        <footer>
+            <OverflowToolbar id="otbFooter">
+                <ToolbarSpacer />
+                <Button text="Reject" type="Reject" icon="sap-icon://decline" press="onRejectButtonPress"/>
+                <Button text="Approve" type="Success" press="onApproveButtonPress"></Button>
+            </OverflowToolbar>
+        </footer>
+    </Page>
+</mvc:View>

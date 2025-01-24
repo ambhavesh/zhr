@@ -1,0 +1,14 @@
+<mvc:View controllerName="zleaveinbox.controller.App"
+    displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+     <SplitApp id="idSplitApp">
+        <masterPages>
+            <mvc:XMLView viewName="zleaveinbox.view.Master" id="Master"/>
+        </masterPages>
+        <detailPages>
+            <mvc:XMLView viewName="zleaveinbox.view.Detail" id="Detail"/>
+            <mvc:XMLView viewName="zleaveinbox.view.DetailEmpty" id="DetailEmpty"/>
+        </detailPages>
+    </SplitApp>
+</mvc:View>

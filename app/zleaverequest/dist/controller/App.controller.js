@@ -1,0 +1,2 @@
+sap.ui.define(["sap/ui/core/mvc/Controller"],e=>{"use strict";return e.extend("zleaverequest.controller.App",{onInit(){},getRouter:function(){return this.getOwnerComponent().getRouter()},getModel:function(e){return e===""?this.getOwnerComponent().getModel():this.getOwnerComponent().getModel(e)},getFilter:function(e,t,n){return new sap.ui.model.Filter({path:e,operator:t,value1:n})},setBusy:function(e){e.setBusyIndicatorDelay(0);return e.setBusy(true)},hideBusy:function(e){return e.setBusy(false)}})});
+//# sourceMappingURL=App.controller.js.map

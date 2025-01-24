@@ -1,0 +1,30 @@
+<mvc:View
+    controllerName="zleaveinbox.controller.Master"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+    displayBlock="true"
+    height="100%"
+    busyIndicatorDelay="0"
+    xmlns:tnt="sap.tnt"
+>
+    <Page title="Request Overview" titleAlignment="Center" showHeader="false">
+        <content>
+            <VBox
+                
+                id="gifContainer"
+                justifyContent="Center"
+                alignItems="Center"
+                width="100%"
+                height="100%"
+            >
+                <IllustratedMessage
+                    illustrationType="sapIllus-PageNotFound"
+                    illustrationSize="Scene"
+                    title="No leave request selected."
+                    description="Select a leave request to display the information"
+                />
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>
