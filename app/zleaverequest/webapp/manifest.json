@@ -82,7 +82,8 @@
           "operationMode": "Server",
           "autoExpandSelect": true,
           "earlyRequests": true,
-          "useBatch": true
+          "useBatch": true,
+          "defaultBindingMode": "OneWay"
         }
       },
       "LeaveModel": {
