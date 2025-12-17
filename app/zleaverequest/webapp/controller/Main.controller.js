@@ -17,10 +17,10 @@ sap.ui.define([
             oLeaveModel.setProperty("/TypeItems", Models.getLeaveTypeItems());
             await this.getUserDetails();
             this.getLeaveRequest();
-            this.getRouter().getRoute("RouteMain").attachPatternMatched(this._onObjectMatched, this);
+            this.getRouter().getRoute("RouteMain").attachPatternMatched(this._onPatternMatched, this);
         },
 
-        _onObjectMatched: function () {
+        _onPatternMatched: function () {
             this.getLeaveRequest();
         },
 
