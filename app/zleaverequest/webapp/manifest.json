@@ -82,7 +82,7 @@
           "operationMode": "Server",
           "autoExpandSelect": true,
           "earlyRequests": true,
-          "useBatch": false
+          "useBatch": true
         }
       },
       "LeaveModel": {
