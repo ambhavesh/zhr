@@ -83,7 +83,7 @@
           "autoExpandSelect": true,
           "earlyRequests": true,
           "useBatch": true,
-          "defaultBindingMode": "OneWay"
+          "defaultBindingMode": "TwoWay"
         }
       },
       "LeaveModel": {
