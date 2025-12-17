@@ -1,7 +1,7 @@
 {
-  "_version": "1.65.0",
+  "_version": "1.76.0",
   "sap.app": {
-    "id": "zleaverequest",
+    "id": "employee",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -12,8 +12,8 @@
     "resources": "resources.json",
     "sourceTemplate": {
       "id": "@sap/generator-fiori:basic",
-      "version": "1.16.2",
-      "toolsId": "73475a8c-dead-4e68-8d8b-12c7427f35ce"
+      "version": "1.20.0",
+      "toolsId": "82af79e7-2491-41cb-bc3b-fd770562e5d7"
     },
     "dataSources": {
       "mainService": {
@@ -22,19 +22,6 @@
         "settings": {
           "annotations": [],
           "odataVersion": "2.0"
-        }
-      }
-    },
-    "crossNavigation": {
-      "inbounds": {
-        "leaveRequest-create": {
-          "semanticObject": "leaveRequest",
-          "action": "create",
-          "title": "{{flpTitle}}",
-          "signature": {
-            "parameters": {},
-            "additionalParameters": "allowed"
-          }
         }
       }
     }
@@ -58,7 +45,7 @@
   "sap.ui5": {
     "flexEnabled": false,
     "dependencies": {
-      "minUI5Version": "1.131.1",
+      "minUI5Version": "1.143.2",
       "libs": {
         "sap.m": {},
         "sap.ui.core": {}
@@ -72,22 +59,19 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "zleaverequest.i18n.i18n"
+          "bundleName": "employee.i18n.i18n"
         }
       },
       "": {
         "dataSource": "mainService",
         "preload": true,
         "settings": {
-          "operationMode": "Server",
-          "autoExpandSelect": true,
-          "earlyRequests": true
+          "useBatch":true,
+          "defaultBindingMode": "TwoWay"
         }
       },
-      "LeaveModel":{
-        "type": "sap.ui.model.json.JSONModel",
-        "settings": {},
-        "preload":false
+      "ui":{
+        "type": "sap.ui.model.json.JSONModel"
       }
     },
     "resources": {
@@ -105,54 +89,31 @@
         "transition": "slide",
         "type": "View",
         "viewType": "XML",
-        "path": "zleaverequest.view"
+        "path": "employee.view",
+        "async": true,
+        "viewPath": "employee.view"
       },
       "routes": [
         {
-          "name": "RouteMain",
+          "name": "RouteList",
           "pattern": ":?query:",
           "target": [
-            "TargetMain"
-          ]
-        },
-        {
-          "name": "LeaveRequest",
-          "pattern": "LeaveRequest/{LeaveRequestId}/:LeaveType:",
-          "target": [
-            "LeaveRequest"
-          ]
-        },
-        {
-          "name": "EditLeaveRequestDetail",
-          "pattern": "ModifyRequest",
-          "target": [
-            "EditLeaveRequestDetail"
+            "TargetList"
           ]
         }
       ],
       "targets": {
-        "TargetMain": {
-          "id": "Main",
-          "name": "Main"
-        },
-        "LeaveRequest": {
-          "id": "LeaveRequestDetail",
-          "name": "LeaveRequestDetail"
-        },
-        "EditLeaveRequestDetail": {
-          "id": "EditLeaveRequestDetail",
-          "name": "EditLeaveRequestDetail"
+        "TargetList": {
+          "id": "List",
+          "name": "List"
         }
       }
     },
     "rootView": {
-      "viewName": "zleaverequest.view.App",
+      "viewName": "employee.view.App",
       "type": "XML",
-      "id": "App"
+      "id": "App",
+      "async": true
     }
-  },
-  "sap.cloud": {
-    "public": true,
-    "service": "approuter"
   }
 }

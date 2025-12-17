@@ -58,6 +58,7 @@ sap.ui.define([
             oLeaveRequesteModifiedObj.FROM_DATE = sDateRange.split(" - ")[0];
             oLeaveRequesteModifiedObj.TO_DATE = sDateRange.split(" - ")[1];
             var sPath = `/LeaveRequests(guid'${oLeaveRequesteModifiedObj.LEAVE_REQUEST_ID}')`;
+            
             this.getModel().update(sPath, oLeaveRequesteModifiedObj, {
                 success: ()=>{
                     this.getRouter().navTo("LeaveRequest", {

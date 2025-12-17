@@ -46,10 +46,10 @@ sap.ui.define([
                     },
                     error: (error) => {
                         reject(error);
-                        MessageBox.error("Failed to load, Instance is crashed or stopped",{
+                        MessageBox.error("Failed to load, Instance is crashed or stopped", {
                             title: "Error",
                         });
-                     }
+                    }
                 })
             });
 
@@ -70,8 +70,8 @@ sap.ui.define([
                     this.getModel("LeaveModel").setProperty("/LeaveRequestItem", oData.results);
                     this.getModel("LeaveModel").setProperty("/RequestCount", oData.results.length);
                 },
-                error: (oError) => { 
-                    MessageBox.error("Failed to load, Instance is crashed or stopped",{
+                error: (oError) => {
+                    MessageBox.error("Failed to load, Instance is crashed or stopped", {
                         title: "Error",
                     });
                 }
@@ -124,10 +124,10 @@ sap.ui.define([
                     sap.ui.core.BusyIndicator.hide();
                 },
                 error: function (oError) {
-                    MessageBox.error("Failed to create, Instance is crashed or stopped",{
+                    MessageBox.error("Failed to create, Instance is crashed or stopped", {
                         title: "Error",
                     });
-                 }
+                }
             });
         },
 
@@ -139,7 +139,8 @@ sap.ui.define([
             oLeaveModel.setProperty("/SelectedLeaveRequestObj", oSelectedLeaveRequestObj);
             oSelectedLeaveRequestObj.STATUS === "Pending" ? oLeaveModel.setProperty("/EnabledForModify", true) : oLeaveModel.setProperty("/EnabledForModify", false);
             this.getRouter().navTo("LeaveRequest", {
-                LeaveRequestId: oSelectedLeaveRequestObj.LEAVE_REQUEST_ID
+                LeaveRequestId: oSelectedLeaveRequestObj.LEAVE_REQUEST_ID,
+                LeaveType: decodeURIComponent(oSelectedLeaveRequestObj.TYPE)
             });
         }
 

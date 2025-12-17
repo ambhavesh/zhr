@@ -12,6 +12,7 @@ module.exports = (srv => {
         let tx = db.tx();
         try {
             let { FIRST_NAME, LAST_NAME, EMAIL } = req.data;
+            req.data.LAUNCHPAD_USER = EMAIL;
             const qrCodeData = `${req.data.EMP_ID}:${FIRST_NAME}`;
             const qrCodeUrl = await QRCode.toDataURL(qrCodeData, {
                 width: 300,
@@ -29,7 +30,7 @@ module.exports = (srv => {
                 port: 587,
                 auth: {
                     user: 'tiwaribhavesh45@gmail.com',
-                    pass: 'tuyr ewns ylvt vprl'
+                    pass: 'ftbk elen ufuh cmsg'
                 }
             });
             const mailInfo = await transporter.sendMail({

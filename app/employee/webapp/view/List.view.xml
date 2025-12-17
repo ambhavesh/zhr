@@ -1,0 +1,59 @@
+<mvc:View
+    controllerName="employee.controller.List"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+>
+    <Page
+        id="page"
+        title="{i18n>title}"
+        titleAlignment="Center"
+    >
+        <Table
+            id="employeeTable"
+            items="{/EmployeeSet}"
+            selectionChange="onEmployeeSelectionChange"
+            mode="MultiSelect"
+        >
+            <headerToolbar>
+                <OverflowToolbar>
+                    <ToolbarSpacer />
+                    <Button
+                        text="Update"
+                        press="onUpdatePress"
+                        enabled="{ui>/editEnabled}"
+                    />
+                </OverflowToolbar>
+            </headerToolbar>
+            <columns>
+                <Column >
+                    <Label text="First Name" />
+                </Column>
+                <Column>
+                    <Label text="Last Name" />
+                </Column>
+                <Column>
+                    <Label text="Gender" />
+                </Column>
+                <Column>
+                    <Label text="Email" />
+                </Column>
+                <Column>
+                    <Label text="Module" />
+                </Column>
+            </columns>
+            <ColumnListItem>
+                <Input
+                    value="{FIRST_NAME}"
+                    enabled="false"
+                />
+                <Input
+                    value="{LAST_NAME}"
+                    enabled="false"
+                />
+                <Text text="{GENDER}" />
+                <Text text="{EMAIL}" />
+                <Text text="{MODULE}" />
+            </ColumnListItem>
+        </Table>
+    </Page>
+</mvc:View>

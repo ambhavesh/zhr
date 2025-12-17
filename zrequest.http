@@ -1,7 +1,7 @@
 GET http://localhost:4004/odata/Employees
 ###
 
-DELETE http://localhost:4004/odata/Employees(8)
+DELETE http://localhost:4004/odata/Employees('guid ac1cab06-9176-4812-a7fe-f0c7e4d0716'4)
 
 ###
 
@@ -9,11 +9,11 @@ POST http://localhost:4004/odata/Employees
 Content-Type: application/json
 
 {
-      "FIRST_NAME": "Kurvesh",
-      "LAST_NAME": "Patel",
+      "FIRST_NAME": "Bhavesh",
+      "LAST_NAME": "Tiwari",
       "GENDER": "Male",
-      "EMAIL": "kurvesh.patel@vsdtechno.com",
-      "EXPERIENCE":2,
+      "EMAIL": "tiwaribhavesh45@gmail.com.com",
+      "EXPERIENCE":3,
       "DESIGNATION":"SAP UI5 & Fiori Consultant",
       "MODULE":"SAP UI5 & Fiori",
       "MODULE_TYPE":"Technical",
@@ -76,7 +76,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:4004/odata/LeaveRequests('9e8665ff-9f05-46d4-9808-3d3bd081f01f')
+DELETE http://localhost:4004/odata/LeaveRequests('e52468b1-8931-429d-838f-ae298b5ef6a9')
 
 ###
 
@@ -111,10 +111,14 @@ POST http://localhost:4004/odata/LeaveBalances
 Content-Type: application/json
 
 {
-    "TOTAL_LEAVE_COUNT":20,
-    "AVAILABLE_LEAVE_COUNT":17,
-    "EMP_EMP_ID":"ef8f3d67-a0da-4cbb-be32-113f97453d4c"
+    "TOTAL_LEAVE_COUNT":30,
+    "AVAILABLE_LEAVE_COUNT":28,
+    "EMP_EMP_ID":"2c0d855c-8979-4995-a36c-07bfca29a093"
 }
+
+###
+
+DELETE  http://localhost:4004/odata/LeaveBalances('ee337641-f98a-493f-8ef1-a1976c5e7d8f')
 
 ###
 
