@@ -10,10 +10,10 @@ sap.ui.define([
         formatter: Formatter,
         onInit: function () {
             this.getModel().setUseBatch(false);
-            this.getRouter().getRoute("LeaveRequest").attachPatternMatched(this._onObjectMatched, this);
+            this.getRouter().getRoute("LeaveRequest").attachPatternMatched(this._onPatternMatched, this);
         },
 
-        _onObjectMatched: async function () {
+        _onPatternMatched: async function () {
             await this.getLeaveRequest();
         },
 
