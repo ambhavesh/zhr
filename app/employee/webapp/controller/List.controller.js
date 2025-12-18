@@ -7,7 +7,7 @@ sap.ui.define([
     return Controller.extend("employee.controller.List", {
         onInit() {
             this.oUIModel = this.getModel("ui");
-            this.oUIModel.setProperty("/editEnabled", false);
+            this.oUIModel.setProperty("/editVisible", false);
         },
 
         onRefreshPress() {
@@ -20,7 +20,7 @@ sap.ui.define([
                     MessageBox.success("Employee updated successfully", { title: "Success" });
                     const oEmployeeTable = this.byId("employeeTable");
                     oEmployeeTable.removeSelections(true);
-                    this.oUIModel.setProperty("/editEnabled", oEmployeeTable.getSelectedItems().length > 0)
+                    this.oUIModel.setProperty("/editVisible", oEmployeeTable.getSelectedItems().length > 0)
 
                     oEmployeeTable.getItems().forEach(item => {
                         item.getCells().forEach(cell => {
@@ -52,7 +52,7 @@ sap.ui.define([
             const bSelected = mParams.selected;
             const aListItems = mParams.listItems;
             const aSelectedItems = oEvent.getSource().getSelectedItems();
-            this.oUIModel.setProperty("/editEnabled", aSelectedItems.length > 0);
+            this.oUIModel.setProperty("/editVisible", aSelectedItems.length > 0);
 
             aListItems.forEach(item => {
                 item.getCells().forEach(cell => {
