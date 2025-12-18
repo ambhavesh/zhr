@@ -7,7 +7,8 @@ sap.ui.define([
     return Controller.extend("employee.controller.List", {
         onInit() {
             this.oUIModel = this.getModel("ui");
-            this.oUIModel.setProperty("/editEnabled", false);
+            const bEnabled = false;
+            this.oUIModel.setProperty("/editEnabled", bEnabled);
         },
 
         onRefreshPress() {
