@@ -6,31 +6,12 @@ sap.ui.define([
 
     return Controller.extend("employee.controller.List", {
         onInit() {
+            this.oUIModel = this.getModel("ui");
+            this.oUIModel.setProperty("/editEnabled", false);
         },
 
-        onEmployeeSelectionChange(oEvent) {
-            const mParams = oEvent.getParameters();
-            const bSelected = mParams.selected;
-            const aListItems = mParams.listItems;
-            const aSelectedItems = oEvent.getSource().getSelectedItems();
-            this.getOwnerComponent().getModel("ui").setProperty("/editEnabled", aSelectedItems.length > 0);
-
-            aListItems.forEach(item => {
-                item.getCells().forEach(cell => {
-                    if (cell.getBindingInfo("value")) {
-                        cell.setEnabled(bSelected);
-
-                        if (!bSelected) {
-                            const oContext = item.getBindingContext();
-                            if (oContext) {
-                                const oModel = oContext.getModel();
-                                const sPath = oContext.getPath();
-                                oModel.resetChanges([sPath]);
-                            }
-                        }
-                    }
-                });
-            });
+        onRefreshPress() {
+            this.getModel().refresh();
         },
 
         onUpdatePress: async function () {
@@ -39,7 +20,7 @@ sap.ui.define([
                     MessageBox.success("Employee updated successfully", { title: "Success" });
                     const oEmployeeTable = this.byId("employeeTable");
                     oEmployeeTable.removeSelections(true);
-                    this.getModel("ui").setProperty("/editEnabled", oEmployeeTable.getSelectedItems().length > 0)
+                    this.oUIModel.setProperty("/editEnabled", oEmployeeTable.getSelectedItems().length > 0)
 
                     oEmployeeTable.getItems().forEach(item => {
                         item.getCells().forEach(cell => {
@@ -65,6 +46,31 @@ sap.ui.define([
                 }
             });
         },
+
+        onEmployeeSelectionChange(oEvent) {
+            const mParams = oEvent.getParameters();
+            const bSelected = mParams.selected;
+            const aListItems = mParams.listItems;
+            const aSelectedItems = oEvent.getSource().getSelectedItems();
+            this.oUIModel.setProperty("/editEnabled", aSelectedItems.length > 0);
+
+            aListItems.forEach(item => {
+                item.getCells().forEach(cell => {
+                    if (cell.getBindingInfo("value")) {
+                        cell.setEnabled(bSelected);
+
+                        if (!bSelected) {
+                            const oContext = item.getBindingContext();
+                            if (oContext) {
+                                const oModel = oContext.getModel();
+                                const sPath = oContext.getPath();
+                                oModel.resetChanges([sPath]);
+                            }
+                        }
+                    }
+                });
+            });
+        }
 
     });
 });
