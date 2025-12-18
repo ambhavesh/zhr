@@ -26,7 +26,7 @@
                         text="Update"
                         press="onUpdatePress"
                         icon="sap-icon://edit"
-                        visible="{ui>/editVisible}"
+                        enabled="{ui>/editEnabled}"
                     />
                 </OverflowToolbar>
             </headerToolbar>
