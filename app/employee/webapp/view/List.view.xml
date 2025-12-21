@@ -1,65 +1,305 @@
 <mvc:View
+    xmlns:smartvariants="sap.ui.comp.smartvariants"
+    xmlns:f="sap.f"
+    xmlns:smarttable="sap.ui.comp.smarttable"
+    xmlns:smartfilterbar="sap.ui.comp.smartfilterbar"
     controllerName="employee.controller.List"
+    xmlns:core="sap.ui.core"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
 >
-    <Page
+    <f:DynamicPage
         id="page"
-        title="{i18n>title}"
-        titleAlignment="Center"
+        showFooter="true"
     >
-        <Table
-            id="employeeTable"
-            items="{/EmployeeSet}"
-            selectionChange="onEmployeeSelectionChange"
-            mode="MultiSelect"
-        >
-            <headerToolbar>
-                <OverflowToolbar>
-                    <ToolbarSpacer />
-                    <Button
-                        text="Refresh"
-                        press="onRefreshPress"
-                        icon="sap-icon://refresh"
+        <!-- ================= TITLE ================= -->
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <smartvariants:SmartVariantManagement
+                        id="smartVariant"
+                        for="smartFilterBar,smartTable"
+                        persistencyKey="employee.svm"
                     />
-                     <Button
-                        text="Update"
-                        press="onUpdatePress"
-                        icon="sap-icon://edit"
-                        enabled="{ui>/editEnabled}"
-                    />
-                </OverflowToolbar>
-            </headerToolbar>
-            <columns>
-                <Column >
-                    <Label text="First Name" />
-                </Column>
-                <Column>
-                    <Label text="Last Name" />
-                </Column>
-                <Column>
-                    <Label text="Email" />
-                </Column>
-                 <Column>
-                    <Label text="Gender" />
-                </Column>
-                <Column>
-                    <Label text="Module" />
-                </Column>
-            </columns>
-            <ColumnListItem>
-                <Input
-                    value="{FIRST_NAME}"
-                    enabled="false"
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <!-- ================= HEADER ================= -->
+        <f:header>
+            <f:DynamicPageHeader>
+                <smartfilterbar:SmartFilterBar
+                    id="smartFilterBar"
+                    entitySet="EmployeeSet"
+                    smartVariant="smartVariant"
+                    persistencyKey="employee.sfb"
+                >
+                    <smartfilterbar:controlConfiguration>
+                        <smartfilterbar:ControlConfiguration
+                            key="FIRST_NAME"
+                            visibleInAdvancedArea="true"
+                        />
+                        <smartfilterbar:ControlConfiguration
+                            key="LAST_NAME"
+                            visibleInAdvancedArea="true"
+                        />
+                        <smartfilterbar:ControlConfiguration
+                            key="EMAIL"
+                            visibleInAdvancedArea="true"
+                        />
+                    </smartfilterbar:controlConfiguration>
+                </smartfilterbar:SmartFilterBar>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <!-- ================= CONTENT ================= -->
+        <f:content>
+            <smarttable:SmartTable
+                id="smartTable"
+                entitySet="EmployeeSet"
+                header="Employees"
+                smartFilterId="smartFilterBar"
+                tableType="ResponsiveTable"
+                enableAutoBinding="true"
+                enableCopy="false"
+                enableAutoColumnWidth="true"
+                smartVariant="smartVariant"
+                persistencyKey="employee.st"
+                ignoredFields="EMP_ID,LAUNCHPAD_USER,QR_CODE"
+                ignoreFromPersonalisation="EMP_ID,LAUNCHPAD_USER,QR_CODE"
+            >
+                <!-- ===== Toolbar ===== -->
+                <smarttable:customToolbar>
+                    <OverflowToolbar>
+                        <ToolbarSpacer />
+                        <Button
+                            text="Update"
+                            press="onUpdatePress"
+                            enabled="{ui>/editEnabled}"
+                        />
+                        <Button
+                            text="Create"
+                            press="onCreatePress"
+                            type="Transparent"
+                        />
+                        <core:ComponentContainer
+                            usage="spreadsheetImporter"
+                            propagateModel="true"
+                            async="true"
+                            settings="{
+                            tableId:'employeeTable',
+                            spreadsheetFileName: 'Employee.xlsx',
+                            columns: ['FIRST_NAME', 'LAST_NAME','EMAIL','GENDER','MODULE','MODULE_TYPE','DESIGNATION','EXPERIENCE','PHONE_NO','QR_CODE'],
+                            componentContainerData:{
+                                uploadButtonPress:'uploadButtonPress',
+                                buttonText:'Mass Upload'
+                                }
+                            }"
+                        />
+                    </OverflowToolbar>
+                </smarttable:customToolbar>
+
+                <!-- ===== Inner Table ===== -->
+                <Table
+                    id="employeeTable"
+                    mode="{=${ui>/isCreationPending} ? 'None' : 'MultiSelect'}"
+                    sticky="ColumnHeaders"
+                    updateFinished="onUpdateFinished"
+                    selectionChange="onEmployeeSelectionChange"
+                >
+                    <columns>
+                        <!-- First Name -->
+                        <Column width="8rem">
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='{"columnKey":"FIRST_NAME","leadingProperty":"FIRST_NAME","sortProperty":"FIRST_NAME","filterProperty":"FIRST_NAME"}'
+                                />
+                            </customData>
+                            <header>
+                                <Label text="First Name" />
+                            </header>
+                        </Column>
+
+                        <!-- Last Name -->
+                        <Column width="8rem">
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='{"columnKey":"LAST_NAME","leadingProperty":"LAST_NAME","sortProperty":"LAST_NAME","filterProperty":"LAST_NAME"}'
+                                />
+                            </customData>
+                            <header>
+                                <Label text="Last Name" />
+                            </header>
+                        </Column>
+
+                        <!-- Email -->
+                        <Column width="13rem">
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='{"columnKey":"EMAIL","leadingProperty":"EMAIL","sortProperty":"EMAIL","filterProperty":"EMAIL"}'
+                                />
+                            </customData>
+                            <header>
+                                <Label text="Email" />
+                            </header>
+                        </Column>
+
+                        <!-- Gender -->
+                        <Column width="5rem">
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='{"columnKey":"GENDER","leadingProperty":"GENDER","sortProperty":"GENDER","filterProperty":"GENDER"}'
+                                />
+                            </customData>
+                            <header>
+                                <Label text="Gender" />
+                            </header>
+                        </Column>
+
+                        <!-- Module -->
+                        <Column width="8rem">
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='{"columnKey":"MODULE","leadingProperty":"MODULE","sortProperty":"MODULE","filterProperty":"MODULE"}'
+                                />
+                            </customData>
+                            <header>
+                                <Label text="Module" />
+                            </header>
+                        </Column>
+
+                        <!-- Module Type -->
+                        <Column width="7rem">
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='{"columnKey":"MODULE_TYPE","leadingProperty":"MODULE_TYPE","sortProperty":"MODULE_TYPE","filterProperty":"MODULE_TYPE"}'
+                                />
+                            </customData>
+                            <header>
+                                <Label text="Module Type" />
+                            </header>
+                        </Column>
+
+                        <!-- Designation -->
+                        <Column width="13rem">
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='{"columnKey":"DESIGNATION","leadingProperty":"DESIGNATION","sortProperty":"DESIGNATION","filterProperty":"DESIGNATION"}'
+                                />
+                            </customData>
+                            <header>
+                                <Label text="Designation" />
+                            </header>
+                        </Column>
+
+                        <!-- Experience -->
+                        <Column width="6rem">
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='{"columnKey":"EXPERIENCE","leadingProperty":"EXPERIENCE","sortProperty":"EXPERIENCE","filterProperty":"EXPERIENCE"}'
+                                />
+                            </customData>
+                            <header>
+                                <Label text="Experience" />
+                            </header>
+                        </Column>
+
+                        <!-- Contact -->
+                        <Column width="7rem">
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='{"columnKey":"PHONE_NO","leadingProperty":"PHONE_NO","sortProperty":"PHONE_NO","filterProperty":"PHONE_NO"}'
+                                />
+                            </customData>
+                            <header>
+                                <Label text="Contact" />
+                            </header>
+                        </Column>
+
+                        <!-- Action Column (excluded from personalization) -->
+                        <Column width="2.9rem">
+                            <customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='{"columnKey":"_ACTION", "excludeFromPersonalisation":"true"}'
+                                />
+                            </customData>
+                            <header>
+                                <Label text="" />
+                            </header>
+                        </Column>
+                    </columns>
+
+                    <!-- ===== Row Template ===== -->
+                    <ColumnListItem>
+                        <Input
+                            value="{FIRST_NAME}"
+                            editable="false"
+                        />
+                        <Input
+                            value="{LAST_NAME}"
+                            editable="false"
+                        />
+                        <Input
+                            value="{EMAIL}"
+                            editable="false"
+                        />
+                        <Input
+                            value="{GENDER}"
+                            editable="false"
+                        />
+                        <Input
+                            value="{MODULE}"
+                            editable="false"
+                        />
+                        <Input
+                            value="{MODULE_TYPE}"
+                            editable="false"
+                        />
+                        <Input
+                            value="{DESIGNATION}"
+                            editable="false"
+                        />
+                        <Input
+                            value="{EXPERIENCE}"
+                            editable="false"
+                            type="Number"
+                        />
+                        <Input
+                            value="{PHONE_NO}"
+                            editable="false"
+                            type="Number"
+                        />
+
+                        <Button
+                            icon="sap-icon://delete"
+                            type="Transparent"
+                            press="onDeletePress"
+                        />
+                    </ColumnListItem>
+                </Table>
+            </smarttable:SmartTable>
+        </f:content>
+
+        <!-- ================= FOOTER ================= -->
+        <f:footer>
+            <OverflowToolbar visible="{ui>/isCreationPending}">
+                <ToolbarSpacer />
+                <Button
+                    text="Save"
+                    press="onSavePress"
+                    type="Emphasized"
                 />
-                <Input
-                    value="{LAST_NAME}"
-                    enabled="false"
-                />
-                <Text text="{EMAIL}" />
-                <Text text="{GENDER}" />
-                <Text text="{MODULE}" />
-            </ColumnListItem>
-        </Table>
-    </Page>
+            </OverflowToolbar>
+        </f:footer>
+    </f:DynamicPage>
 </mvc:View>
